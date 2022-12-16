@@ -14,6 +14,7 @@ import com.example.aboutme.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private  lateinit var binding: ActivityMainBinding
+    private val myName : MyName = MyName("Aleks")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         //findViewById<Button>(R.id.done_bu).setOnClickListener{addNickname(it)}
         binding.doneBu.setOnClickListener{addNickname(it)}
+        binding.myName = myName
     }
 
     private fun addNickname(view:View){
@@ -37,12 +39,26 @@ class MainActivity : AppCompatActivity() {
 //        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 //        imm.hideSoftInputFromWindow(view.windowToken, 0)
         binding.apply {
-            nicknameText.text = binding.nicknameEdit.text
+            myName?.nickname = nicknameEdit.text.toString()
             invalidateAll()
+
+           // creation du classe myName alors arriba porloqseremplaza
+            // nicknameText.text = binding.nicknameEdit.text
+            //nicknameText.visibility = View.VISIBLE
+           // invalidateAll()
             nicknameEdit.visibility =View.GONE
             doneBu.visibility = View.GONE
-            nicknameText.visibility = View.VISIBLE
+
+
         }
 
+        // Hide the keyboard.
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+
+
     }
+
+
+
 }
